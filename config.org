@@ -114,6 +114,8 @@ are installed below! I keep it because it looks cool. I guess.
 (global-display-line-numbers-mode)
 (setq display-line-numbers-type 'relative)
 (setq ring-bell-function 'ignore)
+(setq-default show-trailing-whitespace t)
+
 
 ; load org-bullets
 (require 'org-bullets)
