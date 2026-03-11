@@ -60,6 +60,7 @@
 (define-key kode-mode-map (kbd "C-c e")   'open-eshell-below)
 (define-key kode-mode-map (kbd "C-c s")   'open-eshell-right)
 (define-key kode-mode-map (kbd "C-c C-c") 'smart-compile)
+(define-key kode-mode-map (kbd "C-c C-v") 'grep)
 (define-key kode-mode-map (kbd "C-c C-f") 'comment-region)
 (define-key kode-mode-map (kbd "C-c C-d") 'comment-indent)
 (define-key kode-mode-map (kbd "C-x C-h") 'previous-buffer)
@@ -68,10 +69,10 @@
 (define-key kode-mode-map (kbd "C-x C-q") 'delete-frame)
 
 ;; unbinding certain annoying keybindings
-(define-key evil-motion-state-map (kbd "C-z") 'nil)
-(define-key global-map (kbd "C-z") 'nil)
+(define-key global-map (kbd "C-x C-c") 'nil)
 (define-key global-map (kbd "M-j") 'nil)
 (define-key global-map (kbd "M-k") 'nil)
+(define-key global-map (kbd "s-x") 'nil)
 
 ;; keybindings applied only in normal mode (evil stage)
 (evil-define-key 'normal kode-mode-map (kbd "M-j")     'move-text-down)
@@ -80,14 +81,14 @@
 (evil-define-key 'normal kode-mode-map (kbd "C-k")     'scroll-down-command)
 
 ;; keybindings applied only in insert mode
-(evil-define-key 'insert kode-mode-map (kbd "C-z") 'evil-normal-state)
+(evil-define-key 'insert kode-mode-map (kbd "C-x C-c") 'evil-normal-state)
 (evil-define-key 'insert kode-mode-map (kbd "M-h") 'evil-backward-char)
 (evil-define-key 'insert kode-mode-map (kbd "M-j") 'evil-next-line)
 (evil-define-key 'insert kode-mode-map (kbd "M-k") 'evil-previous-line)
 (evil-define-key 'insert kode-mode-map (kbd "M-l") 'evil-forward-char)
 
 ;; keybindings applied only in visual mode
-(evil-define-key 'visual kode-mode-map (kbd "C-z") 'evil-normal-state)
+(evil-define-key 'visual kode-mode-map (kbd "C-x C-c") 'evil-normal-state)
 
 ;; keybindings applied only to specific modes
 (define-key minibuffer-mode-map (kbd "M-j") 'ido-next-match)
