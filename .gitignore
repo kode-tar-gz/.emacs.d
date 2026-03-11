@@ -2,6 +2,7 @@
 ido.last
 config.el
 quasi-monochrome-theme.el
+session.*
 eln-cache/
 elpa/
 elpaca/

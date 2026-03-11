@@ -65,7 +65,7 @@
 (define-key kode-mode-map (kbd "C-c C-d") 'comment-indent)
 (define-key kode-mode-map (kbd "C-x C-h") 'previous-buffer)
 (define-key kode-mode-map (kbd "C-x C-l") 'next-buffer)
-(define-key kode-mode-map (kbd "C-x C-s") 'scratch-buffer)
+(define-key kode-mode-map (kbd "C-x C-s") (lambda () (interactive) (switch-to-buffer "*scratch*")))
 (define-key kode-mode-map (kbd "C-x C-q") 'delete-frame)
 
 ;; unbinding certain annoying keybindings
