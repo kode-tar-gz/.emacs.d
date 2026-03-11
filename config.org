@@ -57,12 +57,12 @@ are installed below! I keep it because it looks cool. I guess.
 (ensure-package 'rainbow-mode)
 (ensure-package 'move-text)
 (ensure-package 'hl-todo)
-;;(ensure-package 'flycheck)
-;; UNCOMMENT THIS IF ON A FRESH INSTALL:
-;;(package-refresh-contents)
+;;(ensure-package 'flycheck) ;; uncomment on mac
 (ensure-package 'markdown-mode)
 (ensure-package 'markdown-preview-eww)
 (ensure-package 'markdown-preview-mode)
+;; UNCOMMENT THIS IF ON A FRESH INSTALL:
+;;(package-refresh-contents)
 #+end_src
 
 ** Ido mode
@@ -90,6 +90,12 @@ are installed below! I keep it because it looks cool. I guess.
 (evil-mode 1)
 ;; Enable evil-collection
 (evil-collection-init)
+#+end_src
+
+** Change settings for some packages
+#+begin_src emacs-lisp
+;; make dired try to guess the target when moving / copying
+(setq dired-dwim-target 't)
 #+end_src
 
 ** Load Theme
