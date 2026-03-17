@@ -36,20 +36,20 @@
   (eshell))
 
 (defun smart-compile ()
-  "Context-aware compile. 
-   In wdired: finish edit. 
+  "Context-aware compile.
+   In wdired: finish edit.
    In magit-commit: finish commit.
    Otherwise: compile."
   (interactive)
   (cond
    ((derived-mode-p 'wdired-mode)
     (wdired-finish-edit))
-   
+
    ((or (derived-mode-p 'git-commit-mode)
         (bound-and-true-p with-editor-mode))
     (with-editor-finish nil))
 
-   (t 
+   (t
     (call-interactively 'compile))))
 
 ;; kode-mode exceptions (modes and buffers where kode-mode should be disabled):
