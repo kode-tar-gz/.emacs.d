@@ -79,6 +79,8 @@
 (evil-define-key 'normal kode-mode-map (kbd "M-k")     'move-text-up)
 (evil-define-key 'normal kode-mode-map (kbd "C-j")     'scroll-up-command)
 (evil-define-key 'normal kode-mode-map (kbd "C-k")     'scroll-down-command)
+(evil-define-key 'normal kode-mode-map (kbd "C-c +") 'evil-numbers/inc-at-pt)
+(evil-define-key 'normal kode-mode-map (kbd "C-c -") 'evil-numbers/dec-at-pt)
 
 ;; keybindings applied only in insert mode
 (evil-define-key 'insert kode-mode-map (kbd "C-x C-c") 'evil-normal-state)

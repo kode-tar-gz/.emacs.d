@@ -47,6 +47,7 @@ are installed below! I keep it because it looks cool. I guess.
 #+begin_src emacs-lisp
 (ensure-package 'evil)
 (ensure-package 'evil-collection)
+(ensure-package 'evil-numbers)
 (ensure-package 'magit)
 (ensure-package 'company)
 (ensure-package 'company-c-headers)
