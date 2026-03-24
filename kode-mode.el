@@ -84,10 +84,10 @@
 
 ;; keybindings applied only in insert mode
 (evil-define-key 'insert kode-mode-map (kbd "C-x C-c") 'evil-normal-state)
-(evil-define-key 'insert kode-mode-map (kbd "M-h") 'evil-backward-char)
-(evil-define-key 'insert kode-mode-map (kbd "M-j") 'evil-next-line)
-(evil-define-key 'insert kode-mode-map (kbd "M-k") 'evil-previous-line)
-(evil-define-key 'insert kode-mode-map (kbd "M-l") 'evil-forward-char)
+(evil-define-key 'insert kode-mode-map (kbd "M-h") 'left-char)
+(evil-define-key 'insert kode-mode-map (kbd "M-j") 'next-line)
+(evil-define-key 'insert kode-mode-map (kbd "M-k") 'previous-line)
+(evil-define-key 'insert kode-mode-map (kbd "M-l") 'right-char)
 
 ;; keybindings applied only in visual mode
 (evil-define-key 'visual kode-mode-map (kbd "C-x C-c") 'evil-normal-state)
