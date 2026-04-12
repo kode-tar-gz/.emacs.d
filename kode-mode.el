@@ -89,6 +89,7 @@
 (evil-define-key 'insert kode-mode-map (kbd "M-j") 'next-line)
 (evil-define-key 'insert kode-mode-map (kbd "M-k") 'previous-line)
 (evil-define-key 'insert kode-mode-map (kbd "M-l") 'right-char)
+(evil-define-key 'insert kode-mode-map (kbd "C-p") 'evil-paste-after)
 
 ;; keybindings applied only in visual mode
 (evil-define-key 'visual kode-mode-map (kbd "C-x C-c") 'evil-normal-state)
