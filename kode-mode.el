@@ -98,6 +98,8 @@
 (define-key minibuffer-mode-map (kbd "M-j") 'ido-next-match)
 (define-key minibuffer-mode-map (kbd "M-k") 'ido-prev-match)
 
+(evil-define-key 'normal dired-mode-map (kbd "T") 'dired-create-empty-file)
+
 ;; Other keybindings I use a lot (dont forget these!):
 ;; "+" in dired (normal mode): create directory
 ;; "C-x w d": toggle window to dedicated (won't change buffers)
