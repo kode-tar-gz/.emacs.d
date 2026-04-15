@@ -57,17 +57,17 @@
 (add-hook 'minibuffer-setup-hook 'turn-off-kode-mode)
 
 ;; here's where my custom keybindings, applied to all buffers, reside.
-(define-key kode-mode-map (kbd "C-c e")   'open-eshell-below)
-(define-key kode-mode-map (kbd "C-c s")   'open-eshell-right)
-(define-key kode-mode-map (kbd "C-c C-c") 'smart-compile)
-(define-key kode-mode-map (kbd "C-c C-v") 'grep)
-(define-key kode-mode-map (kbd "C-c C-f") 'comment-region)
+(define-key kode-mode-map (kbd "C-c e")     'open-eshell-below)
+(define-key kode-mode-map (kbd "C-c s")     'open-eshell-right)
+(define-key kode-mode-map (kbd "C-c C-c")   'smart-compile)
+(define-key kode-mode-map (kbd "C-c C-v")   'grep)
+(define-key kode-mode-map (kbd "C-c C-f")   'comment-region)
 (define-key kode-mode-map (kbd "C-c C-S-f") 'uncomment-region)
-(define-key kode-mode-map (kbd "C-c C-d") 'comment-indent)
-(define-key kode-mode-map (kbd "C-x C-h") 'previous-buffer)
-(define-key kode-mode-map (kbd "C-x C-l") 'next-buffer)
-(define-key kode-mode-map (kbd "C-x C-s") (lambda () (interactive) (switch-to-buffer "*scratch*")))
-(define-key kode-mode-map (kbd "C-x C-q") 'delete-frame)
+(define-key kode-mode-map (kbd "C-c C-d")   'comment-indent)
+(define-key kode-mode-map (kbd "C-x C-h")   'previous-buffer)
+(define-key kode-mode-map (kbd "C-x C-l")   'next-buffer)
+(define-key kode-mode-map (kbd "C-x C-s")   (lambda () (interactive) (switch-to-buffer "*scratch*")))
+(define-key kode-mode-map (kbd "C-x C-q")   'delete-frame)
 
 ;; unbinding certain annoying keybindings
 (define-key global-map (kbd "C-x C-c") 'nil)
@@ -80,16 +80,16 @@
 (evil-define-key 'normal kode-mode-map (kbd "M-k")     'move-text-up)
 (evil-define-key 'normal kode-mode-map (kbd "C-j")     'scroll-up-command)
 (evil-define-key 'normal kode-mode-map (kbd "C-k")     'scroll-down-command)
-(evil-define-key 'normal kode-mode-map (kbd "C-c +") 'evil-numbers/inc-at-pt)
-(evil-define-key 'normal kode-mode-map (kbd "C-c -") 'evil-numbers/dec-at-pt)
+(evil-define-key 'normal kode-mode-map (kbd "C-c +")   'evil-numbers/inc-at-pt)
+(evil-define-key 'normal kode-mode-map (kbd "C-c -")   'evil-numbers/dec-at-pt)
 
 ;; keybindings applied only in insert mode
 (evil-define-key 'insert kode-mode-map (kbd "C-x C-c") 'evil-normal-state)
-(evil-define-key 'insert kode-mode-map (kbd "M-h") 'left-char)
-(evil-define-key 'insert kode-mode-map (kbd "M-j") 'next-line)
-(evil-define-key 'insert kode-mode-map (kbd "M-k") 'previous-line)
-(evil-define-key 'insert kode-mode-map (kbd "M-l") 'right-char)
-(evil-define-key 'insert kode-mode-map (kbd "C-p") 'evil-paste-after)
+(evil-define-key 'insert kode-mode-map (kbd "M-h")     'left-char)
+(evil-define-key 'insert kode-mode-map (kbd "M-j")     'next-line)
+(evil-define-key 'insert kode-mode-map (kbd "M-k")     'previous-line)
+(evil-define-key 'insert kode-mode-map (kbd "M-l")     'right-char)
+(evil-define-key 'insert kode-mode-map (kbd "C-p")     'evil-paste-after)
 
 ;; keybindings applied only in visual mode
 (evil-define-key 'visual kode-mode-map (kbd "C-x C-c") 'evil-normal-state)
