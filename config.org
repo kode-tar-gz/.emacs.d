@@ -222,4 +222,5 @@ The IDE for common lisp.
 *** A simple major mode for editing chasm files
 #+begin_src emacs-lisp
 (load-file "~/.emacs.d/chasm-mode.el")
+(add-hook 'chasm-mode-hook (lambda ()(rainbow-mode -1)))
 #+end_src
