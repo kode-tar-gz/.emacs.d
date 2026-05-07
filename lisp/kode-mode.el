@@ -4,6 +4,7 @@
 (require 'rust-mode)
 (require 'evil)
 
+;; ----- minor mode things -----
 (defvar kode-mode-map (make-sparse-keymap)
   "Keymap for 'kode-mode'.")
 
@@ -24,6 +25,7 @@
   "Turn off kode-mode."
   (kode-mode -1))
 
+;; ----- custom functions -----
 (defun open-eshell-below ()
   "Open an eshell buffer in a new window"
   (interactive)
@@ -68,26 +70,14 @@
    (t
     (call-interactively 'compile))))
 
-;; kode-mode exceptions (modes and buffers where kode-mode should be disabled):
+;; --------------------------------------------------------
+;; -------------- START OF KEYBINDING CONFIG --------------
+
+;; ----- kode-mode exceptions -----
 (add-hook 'magit-mode-hook 'turn-off-kode-mode)
 (add-hook 'minibuffer-setup-hook 'turn-off-kode-mode)
 
-;; here's where my custom keybindings, applied to all buffers, reside.
-(define-key kode-mode-map (kbd "C-c e")     'open-eshell-below)
-(define-key kode-mode-map (kbd "C-c s")     'open-eshell-right)
-(define-key kode-mode-map (kbd "C-c m")     'magit)
-(define-key kode-mode-map (kbd "C-c C-c")   'smart-compile)
-(define-key kode-mode-map (kbd "C-c C-e")   'eval-region)
-(define-key kode-mode-map (kbd "C-c C-v")   'grep)
-(define-key kode-mode-map (kbd "C-c C-S-f") 'uncomment-region)
-(define-key kode-mode-map (kbd "C-c C-d")   'dired-at-point)
-(define-key kode-mode-map (kbd "C-c C-f")   'find-file-at-point)
-(define-key kode-mode-map (kbd "C-x C-h")   'previous-buffer)
-(define-key kode-mode-map (kbd "C-x C-l")   'next-buffer)
-(define-key kode-mode-map (kbd "C-x C-s")   (lambda () (interactive) (switch-to-buffer "*scratch*")))
-(define-key kode-mode-map (kbd "C-x C-q")   'delete-frame)
-
-;; unbinding certain annoying keybindings
+;; ----- unbinding annoying keybindings -----
 (define-key global-map (kbd "C-x C-c") 'nil)
 (define-key global-map (kbd "M-j") 'nil)
 (define-key global-map (kbd "M-k") 'nil)
@@ -95,7 +85,23 @@
 (define-key global-map (kbd "C-_") 'nil)
 (define-key evil-motion-state-map (kbd "\\") 'nil)
 
-;; keybindings applied only in normal mode (evil stage)
+;; ----- custom keybindings, applied to all buffers -----
+(define-key kode-mode-map (kbd "C-c e")     'open-eshell-below)
+(define-key kode-mode-map (kbd "C-c s")     'open-eshell-right)
+(define-key kode-mode-map (kbd "C-c m")     'magit)
+(define-key kode-mode-map (kbd "C-c C-c")   'smart-compile)
+(define-key kode-mode-map (kbd "C-c C-e")   'eval-region)
+(define-key kode-mode-map (kbd "C-c C-v")   'grep)
+(define-key kode-mode-map (kbd "C-c C-S-f") 'uncomment-region)
+(define-key kode-mode-map (kbd "C-c C-f")   'find-file-at-point)
+(define-key kode-mode-map (kbd "C-c C-d")   'dired-at-point)
+(define-key kode-mode-map (kbd "C-x C-d")   'ido-dired)
+(define-key kode-mode-map (kbd "C-x C-h")   'previous-buffer)
+(define-key kode-mode-map (kbd "C-x C-l")   'next-buffer)
+(define-key kode-mode-map (kbd "C-x C-s")   (lambda () (interactive) (switch-to-buffer "*scratch*")))
+(define-key kode-mode-map (kbd "C-x C-q")   'delete-frame)
+
+;; ----- normal mode keybindings -----
 (evil-define-key 'normal kode-mode-map (kbd "M-k")     'move-text-up)
 (evil-define-key 'normal kode-mode-map (kbd "M-j")     'move-text-down)
 (evil-define-key 'normal kode-mode-map (kbd "C-j")     'scroll-up-command)
@@ -103,7 +109,7 @@
 (evil-define-key 'normal kode-mode-map (kbd "C-c +")   'evil-numbers/inc-at-pt)
 (evil-define-key 'normal kode-mode-map (kbd "C-c -")   'evil-numbers/dec-at-pt)
 
-;; keybindings applied only in insert mode
+;; ----- insert mode keybindings -----
 (evil-define-key 'insert kode-mode-map (kbd "C-x C-c") 'evil-normal-state)
 ;; these bindings arent needed when im using my split keyboard
 ;;(evil-define-key 'insert kode-mode-map (kbd "M-h")     'left-char)
@@ -112,14 +118,14 @@
 ;;(evil-define-key 'insert kode-mode-map (kbd "M-l")     'right-char)
 (evil-define-key 'insert kode-mode-map (kbd "C-p")     'evil-paste-after)
 
-;; keybindings applied only in visual mode
+;; ----- visual mode keybindings -----
 (evil-define-key 'visual kode-mode-map (kbd "C-x C-c") 'evil-normal-state)
 
-;; keybindings applied only to specific modes
-(define-key minibuffer-mode-map (kbd "M-j") 'ido-next-match)
-(define-key minibuffer-mode-map (kbd "M-k") 'ido-prev-match)
-
+;; ----- keybindings for specific modes -----
 (evil-define-key 'normal dired-mode-map (kbd "T") 'dired-create-empty-file)
+
+;; -------------- END OF KEYBINDING CONFIG --------------
+;; ------------------------------------------------------
 
 ;; Other keybindings I use a lot (dont forget these!):
 ;; "+" in dired (normal mode): create directory
