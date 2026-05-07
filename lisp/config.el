@@ -7,12 +7,12 @@
 ;; ------------------------------------------------------
 ;; -------------- START OF PACKAGES CONFIG --------------
 
-;; Set up melpa
+;; ----- set up melpa -----
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
-;; ensure that every package we need is installed
+;; ----- ensure that every package we need is installed -----
 (ensure-package 'evil)
 (ensure-package 'evil-collection)
 (ensure-package 'evil-numbers)
@@ -57,6 +57,10 @@
   :config
   (setq-default compile-command ""))
 
+(use-package eglot
+  :bind (:map eglot-mode-map
+	 ("C-c C-h" . #'eldoc-doc-buffer)))
+
 (use-package ido
   :config
   (ido-mode 1)
@@ -96,7 +100,7 @@
 
 ;; ----- exec-path-from-shell: use our shell's PATH in emacs -----
 (use-package exec-path-from-shell
-  :when (memq window-system '(mac ns x))
+  :unless (eq system-type 'windows-nt)
   :config
   (exec-path-from-shell-initialize)
   (setenv "BROWSER" "firefox"))

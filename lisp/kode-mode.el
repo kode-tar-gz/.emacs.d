@@ -91,7 +91,7 @@
 ;; ----- custom keybindings, applied to all buffers -----
 (define-key kode-mode-map (kbd "C-c e")     'open-eshell-below)
 (define-key kode-mode-map (kbd "C-c s")     'open-eshell-right)
-(define-key kode-mode-map (kbd "C-c m")     'magit)
+(define-key kode-mode-map (kbd "C-c m")     'man)
 (define-key kode-mode-map (kbd "C-c C-c")   'smart-compile)
 (define-key kode-mode-map (kbd "C-c C-e")   'eval-region)
 (define-key kode-mode-map (kbd "C-c C-v")   'grep)
