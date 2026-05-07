@@ -1,13 +1,12 @@
 *~
 ido.last
-config.el
 chasm-mode.el
 quasi-monochrome-theme.el
 session.*
+*.desktop
 eln-cache/
 elpa/
 elpaca/
-lisp/
 auto-save-list/
 transient/
 url/
