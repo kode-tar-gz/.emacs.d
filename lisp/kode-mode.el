@@ -1,4 +1,6 @@
 ;; My custom minor mode, mainly used for overriding keybindings.
+;; DISCLAIMER: A lot of my custom functions in this file are
+;; made with AI (gemini, mostly). 
 
 (require 'move-text)
 (require 'rust-mode)

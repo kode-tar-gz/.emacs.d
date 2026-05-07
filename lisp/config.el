@@ -143,7 +143,9 @@
 ;; ----------------------------------------------------
 
 ;; ----- Theming! We can disable a lot of things to make emacs prettier -----
-(load-theme 'quasi-monochrome t)
+(require 'match-region-to-cursor)
+(load-theme 'doom-horizon t)
+
 ;; On Linux:
 ;;(add-to-list 'default-frame-alist '(font . "DejaVuSansMono-15"))
 (set-face-attribute 'default nil :height 170)
