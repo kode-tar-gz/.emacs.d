@@ -1,6 +1,6 @@
 ;; My custom minor mode, mainly used for overriding keybindings.
 ;; DISCLAIMER: A lot of my custom functions in this file are
-;; made with AI (gemini, mostly).
+;; made with AI (gemini, mostly). Everything else is me, however.
 
 (require 'move-text)
 (require 'rust-mode)
@@ -80,6 +80,7 @@
 (add-hook 'minibuffer-setup-hook 'turn-off-kode-mode)
 
 ;; ----- unbinding annoying keybindings -----
+(define-key global-map (kbd "C-x C-k RET") 'nil)
 (define-key global-map (kbd "C-x C-c") 'nil)
 (define-key global-map (kbd "M-j") 'nil)
 (define-key global-map (kbd "M-k") 'nil)
