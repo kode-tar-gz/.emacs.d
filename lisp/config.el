@@ -158,8 +158,14 @@
 
 ;; On Linux:
 ;;(add-to-list 'default-frame-alist '(font . "DejaVuSansMono-15"))
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 (set-face-attribute 'default nil :height 170)
+
+(require 'kode-dashboard)
 (setq inhibit-startup-screen t)
+(setq initial-buffer-choice (lambda ()
+                              (kode-dashboard)
+                              (get-buffer "*kode-dashboard*")))
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
