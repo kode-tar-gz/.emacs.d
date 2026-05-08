@@ -109,10 +109,10 @@
           (insert (make-string pad-lines ?\n)))
 
         ;; Insert the buttons
-        (kode-dashboard-insert-button "[ Open Config ]" (lambda () (interactive) (dired "~/.emacs.d/")) "~/.emacs.d/")
-        (kode-dashboard-insert-button "[ Be productive ]" (lambda () (interactive) (dired "~/src/")) "~/src/")
+        (kode-dashboard-insert-button "[ open config ]" (lambda () (interactive) (dired "~/.emacs.d/")) "~/.emacs.d/")
+        (kode-dashboard-insert-button "[ be productive ]" (lambda () (interactive) (dired "~/src/")) "~/src/")
         ;(kode-dashboard-insert-button "[ Magit ]" 'magit-status)
-        (kode-dashboard-insert-button "[ Procrastinate ]" 'tetris "tetris"))
+        (kode-dashboard-insert-button "[ procrastinate ]" 'tetris "tetris"))
 
       ;; Lock down the buffer
       (read-only-mode +1)
