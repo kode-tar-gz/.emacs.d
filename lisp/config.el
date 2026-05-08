@@ -163,9 +163,12 @@
 
 (require 'kode-dashboard)
 (setq inhibit-startup-screen t)
-(setq initial-buffer-choice (lambda ()
-                              (kode-dashboard)
-                              (get-buffer "*kode-dashboard*")))
+(setq initial-buffer-choice (lambda () (get-buffer-create "*kode-dashboard*")))
+
+(add-hook 'window-setup-hook
+          (lambda ()
+            ;; A 0.1 second delay ensures the OS maximize animation is 100% finished
+            (run-with-timer 0.1 nil #'kode-dashboard)))
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)

@@ -46,7 +46,7 @@
               "\n"))))
 
 ;; 3. Helper to insert interactive, centered buttons (Upgraded with Colors!)
-(defun kode-dashboard-insert-button (label command)
+(defun kode-dashboard-insert-button (label command command_str)
   "Insert a horizontally centered button with LABEL that executes COMMAND."
   (let ((padding (max 0 (/ (- (window-width) (string-width label)) 2))))
     (insert (make-string padding ?\s))
@@ -56,7 +56,7 @@
                                   (call-interactively ',command)
                                 (funcall ',command)))
                    'follow-link t
-                   'help-echo (format "Click to run %s" command)
+                   'help-echo (format "Click to run %s" command_str)
                    ;; The default color of the button
                    'face '(bold font-lock-keyword-face)
                    ;; The color when your mouse/cursor highlights it
@@ -109,10 +109,10 @@
           (insert (make-string pad-lines ?\n)))
 
         ;; Insert the buttons
-        (kode-dashboard-insert-button "[ Open Config ]" (lambda () (interactive) (dired "~/.emacs.d/")))
-        (kode-dashboard-insert-button "[ Be productive ]" (lambda () (interactive) (dired "~/src")))
+        (kode-dashboard-insert-button "[ Open Config ]" (lambda () (interactive) (dired "~/.emacs.d/")) "~/.emacs.d/")
+        (kode-dashboard-insert-button "[ Be productive ]" (lambda () (interactive) (dired "~/src/")) "~/src/")
         ;(kode-dashboard-insert-button "[ Magit ]" 'magit-status)
-        (kode-dashboard-insert-button "[ Procrastinate ]" 'tetris))
+        (kode-dashboard-insert-button "[ Procrastinate ]" 'tetris "tetris"))
 
       ;; Lock down the buffer
       (read-only-mode +1)
