@@ -1,3 +1,4 @@
+;; ----- helper function to install all needed packages on first boot -----
 (require 'package)
 (defun ensure-package (package)
   "Install PACKAGE if it is not already installed."
@@ -120,7 +121,7 @@
   (which-key-mode))
 (use-package move-text)
 
-;; ----- org-bullets: prettier org-mode headers and such -----
+;; ----- org-bullets: pretty org-mode headers and such -----
 (use-package org-bullets
   :custom
   (org-edit-src-content-indentation 0)
