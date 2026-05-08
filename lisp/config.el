@@ -37,6 +37,23 @@
 ;; UNCOMMENT THIS IF ON A FRESH INSTALL:
 ;;(package-refresh-contents)
 
+;; ----- configuration for my own files -----
+(use-package match-region-to-cursor)
+
+(use-package kode-dashboard
+  :config
+  (setq initial-buffer-choice (lambda () (get-buffer-create "*kode-dashboard*")))
+
+  ;; Wait until the OS finishes drawing the fullscreen window, THEN draw the UI
+  (add-hook 'window-setup-hook
+            (lambda ()
+              (run-with-timer 0.1 nil #'kode-dashboard))))
+
+(use-package chasm-mode
+  :config
+  ;; we turn off rainbow mode because it thinks constants are colors
+  (add-hook 'chasm-mode-hook (lambda ()(rainbow-mode -1))))
+
 ;; ----- configuration for some built-in packages -----
 (use-package autorevert
   :config
@@ -86,12 +103,6 @@
   :config
   (add-hook 'after-init-hook 'global-company-mode)
   (use-package company-c-headers))
-
-;; ----- chasm-mode: my custom chasm language's mode -----
-(use-package chasm-mode
-  :config
-  ;; we turn off rainbow mode because it thinks constants are colors
-  (add-hook 'chasm-mode-hook (lambda ()(rainbow-mode -1))))
 
 ;; ----- rust-mode: always use cargo for compiling (who needs cargo-mode?) -----
 (use-package rust-mode
@@ -153,22 +164,13 @@
 ;; ----------------------------------------------------
 
 ;; ----- Theming! We can disable a lot of things to make emacs prettier -----
-(require 'match-region-to-cursor)
 (load-theme 'doom-horizon t)
-
 ;; On Linux:
 ;;(add-to-list 'default-frame-alist '(font . "DejaVuSansMono-15"))
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 (set-face-attribute 'default nil :height 170)
 
-(require 'kode-dashboard)
 (setq inhibit-startup-screen t)
-(setq initial-buffer-choice (lambda () (get-buffer-create "*kode-dashboard*")))
-
-(add-hook 'window-setup-hook
-          (lambda ()
-            ;; A 0.1 second delay ensures the OS maximize animation is 100% finished
-            (run-with-timer 0.1 nil #'kode-dashboard)))
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
