@@ -58,7 +58,6 @@
   "Context-aware compile.
    In wdired: finish edit.
    In magit-commit: finish commit.
-   In rust-mode: execute cargo commands.
    Otherwise: compile."
   (interactive)
   (cond
@@ -114,12 +113,12 @@
 
 ;; ----- insert mode keybindings -----
 (evil-define-key 'insert kode-mode-map (kbd "C-x C-c") 'evil-normal-state)
+(evil-define-key 'insert kode-mode-map (kbd "C-p")     'evil-paste-after)
 ;; these bindings arent needed when im using my split keyboard
 ;;(evil-define-key 'insert kode-mode-map (kbd "M-h")     'left-char)
 ;;(evil-define-key 'insert kode-mode-map (kbd "M-j")     'next-line)
 ;;(evil-define-key 'insert kode-mode-map (kbd "M-k")     'previous-line)
 ;;(evil-define-key 'insert kode-mode-map (kbd "M-l")     'right-char)
-(evil-define-key 'insert kode-mode-map (kbd "C-p")     'evil-paste-after)
 
 ;; ----- visual mode keybindings -----
 (evil-define-key 'visual kode-mode-map (kbd "C-x C-c") 'evil-normal-state)
