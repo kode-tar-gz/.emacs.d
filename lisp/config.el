@@ -168,6 +168,8 @@
 ;; On Linux:
 ;;(add-to-list 'default-frame-alist '(font . "DejaVuSansMono-15"))
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
+(if (eq system-type 'darwin)
+    (add-to-list 'default-frame-alist '(undecorated . t)))
 (set-face-attribute 'default nil :height 170)
 
 (setq inhibit-startup-screen t)

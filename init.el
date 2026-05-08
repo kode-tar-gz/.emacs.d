@@ -35,12 +35,7 @@
      "6963de2ec3f8313bb95505f96bf0cf2025e7b07cefdb93e3d2e348720d401425"
      default))
  '(magit-bury-buffer-function 'magit-restore-window-configuration)
- '(package-selected-packages
-   '(codex-theme company-c-headers doom-themes eglot evil-collection
-		 evil-numbers exec-path-from-shell flycheck hl-todo
-		 magit markdown-preview-eww markdown-preview-mode
-		 move-text org-bullets quasi-monochrome-theme
-		 rainbow-mode rust-mode))
+ '(package-selected-packages nil)
  '(safe-local-variable-values
    '((eval let
 	   ((project-include
