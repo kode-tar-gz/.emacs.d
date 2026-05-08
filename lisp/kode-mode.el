@@ -28,35 +28,21 @@
   (kode-mode -1))
 
 ;; ----- custom functions -----
-(defun open-eshell-below ()
+(defun my-open-eshell-below ()
   "Open an eshell buffer in a new window"
   (interactive)
   (split-window-below)
   (other-window 1)
   (eshell))
 
-(defun open-eshell-right ()
+(defun my-open-eshell-right ()
   "Open an eshell buffer in a new window"
   (interactive)
   (split-window-right)
   (other-window 1)
   (eshell))
 
-(defun evil-move-text-up ()
-  (interactive)
-  (call-interactively 'move-text-up)
-  (when (evil-visual-state-p)
-    (setq deactivate-mark nil)
-    (evil-visual-select (region-beginning) (region-end) (evil-visual-type))))
-
-(defun evil-move-text-down ()
-  (interactive)
-  (call-interactively 'move-text-down)
-  (when (evil-visual-state-p)
-    (setq deactivate-mark nil)
-    (evil-visual-select (region-beginning) (region-end) (evil-visual-type))))
-
-(defun dired-at-point ()
+(defun my-dired-at-point ()
   "Open dired on the path at point.
    If the path is a file, open its parent directory."
   (interactive)
@@ -68,7 +54,7 @@
             (dired (file-name-directory expanded-path))))
       (message "No path found at point"))))
 
-(defun smart-compile ()
+(defun my-smart-compile ()
   "Context-aware compile.
    In wdired: finish edit.
    In magit-commit: finish commit.
@@ -103,15 +89,15 @@
 (define-key evil-motion-state-map (kbd "\\") 'nil)
 
 ;; ----- custom keybindings, applied to all buffers -----
-(define-key kode-mode-map (kbd "C-c e")     'open-eshell-below)
-(define-key kode-mode-map (kbd "C-c s")     'open-eshell-right)
+(define-key kode-mode-map (kbd "C-c e")     'my-open-eshell-below)
+(define-key kode-mode-map (kbd "C-c s")     'my-open-eshell-right)
 (define-key kode-mode-map (kbd "C-c m")     'man)
-(define-key kode-mode-map (kbd "C-c C-c")   'smart-compile)
+(define-key kode-mode-map (kbd "C-c C-c")   'my-smart-compile)
 (define-key kode-mode-map (kbd "C-c C-e")   'eval-region)
 (define-key kode-mode-map (kbd "C-c C-v")   'grep)
 (define-key kode-mode-map (kbd "C-c C-S-f") 'uncomment-region)
 (define-key kode-mode-map (kbd "C-c C-f")   'find-file-at-point)
-(define-key kode-mode-map (kbd "C-c C-d")   'dired-at-point)
+(define-key kode-mode-map (kbd "C-c C-d")   'my-dired-at-point)
 (define-key kode-mode-map (kbd "C-x C-d")   'ido-dired)
 (define-key kode-mode-map (kbd "C-x C-h")   'previous-buffer)
 (define-key kode-mode-map (kbd "C-x C-l")   'next-buffer)
@@ -119,8 +105,8 @@
 (define-key kode-mode-map (kbd "C-x C-q")   'delete-frame)
 
 ;; ----- normal mode keybindings -----
-(evil-define-key 'normal kode-mode-map (kbd "M-k")     'evil-move-text-up)
-(evil-define-key 'normal kode-mode-map (kbd "M-j")     'evil-move-text-down)
+(evil-define-key 'normal kode-mode-map (kbd "M-k")     'move-text-up)
+(evil-define-key 'normal kode-mode-map (kbd "M-j")     'move-text-down)
 (evil-define-key 'normal kode-mode-map (kbd "C-j")     'scroll-up-command)
 (evil-define-key 'normal kode-mode-map (kbd "C-k")     'scroll-down-command)
 (evil-define-key 'normal kode-mode-map (kbd "C-c +")   'evil-numbers/inc-at-pt)
@@ -137,8 +123,8 @@
 
 ;; ----- visual mode keybindings -----
 (evil-define-key 'visual kode-mode-map (kbd "C-x C-c") 'evil-normal-state)
-(evil-define-key 'visual kode-mode-map (kbd "M-k")     'evil-move-text-up)
-(evil-define-key 'visual kode-mode-map (kbd "M-j")     'evil-move-text-down)
+(evil-define-key 'visual kode-mode-map (kbd "M-k")     'move-text-up)
+(evil-define-key 'visual kode-mode-map (kbd "M-j")     'move-text-down)
 
 ;; ----- keybindings for specific modes -----
 (evil-define-key 'normal dired-mode-map (kbd "T") 'dired-create-empty-file)
