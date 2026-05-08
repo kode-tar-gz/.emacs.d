@@ -71,6 +71,7 @@
 (use-package evil
   :init
   (setq evil-want-keybinding nil)
+  (setq evil-respect-visual-line-mode t)
   :config
   (evil-mode 1))
 (use-package evil-numbers
@@ -139,7 +140,9 @@
   :if (eq system-type 'mac))
 
 ;; ----- markdown-mode: pretty self-explanatory. we also get some packages to view formatted markdown -----
-(use-package markdown-mode)
+(use-package markdown-mode
+  :config
+  (add-hook 'markdown-mode-hook 'visual-line-mode))
 (use-package markdown-preview-eww)
 (use-package markdown-preview-mode)
 
