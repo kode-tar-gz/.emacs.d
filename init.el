@@ -15,7 +15,8 @@
 					company-keywords)
 		  company-oddmuse company-dabbrev))
  '(custom-safe-themes
-   '("4990532659bb6a285fee01ede3dfa1b1bdf302c5c3c8de9fad9b6bc63a9252f7"
+   '("fed90b0cf3dd7b00b5f0b048542c25d6c19d5335bdf121d8b54e59766f17daae"
+     "4990532659bb6a285fee01ede3dfa1b1bdf302c5c3c8de9fad9b6bc63a9252f7"
      "7ec8fd456c0c117c99e3a3b16aaf09ed3fb91879f6601b1ea0eeaee9c6def5d9"
      "19d62171e83f2d4d6f7c31fc0a6f437e8cec4543234f0548bad5d49be8e344cd"
      "f4d1b183465f2d29b7a2e9dbe87ccc20598e79738e5d29fc52ec8fb8c576fcfd"

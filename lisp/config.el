@@ -46,16 +46,16 @@
   (add-hook 'magit-mode-hook 'auto-revert-mode))
 
 (use-package dired
-  :init
+  :custom
   ;; make dired try to guess the target when moving / copying
-  (setq dired-dwim-target 't)
-  (setq-default dired-listing-switches "-alh")
+  (dired-dwim-target 't)
+  (dired-listing-switches "-alh")
   :config
   (add-hook 'dired-mode-hook 'auto-revert-mode))
 
 (use-package compile
-  :config
-  (setq-default compile-command ""))
+  :custom
+  (compile-command ""))
 
 (use-package eglot
   :bind (:map eglot-mode-map
@@ -96,7 +96,8 @@
   :config
   (add-hook 'rust-mode-hook
 	    (lambda ()
-	      (setq-local compile-command "cargo "))))
+	      (setq-local compile-command "cargo ")))
+  (add-hook 'rust-mode-hook 'eglot-ensure))
 
 ;; ----- exec-path-from-shell: use our shell's PATH in emacs -----
 (use-package exec-path-from-shell
@@ -121,8 +122,9 @@
 
 ;; ----- org-bullets: prettier org-mode headers and such -----
 (use-package org-bullets
+  :custom
+  (org-edit-src-content-indentation 0)
   :config
-  (setq-default org-edit-src-content-indentation 0)
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
 ;; ----- theming thingies. rainbow-mode for color codes and hl-todo for TODO -----
