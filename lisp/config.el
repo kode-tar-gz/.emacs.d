@@ -168,10 +168,12 @@
 ;; On Linux:
 ;;(add-to-list 'default-frame-alist '(font . "DejaVuSansMono-15"))
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
+;; ----- Mac-specific -----
 (if (eq system-type 'darwin)
-    (add-to-list 'default-frame-alist '(undecorated . t)))
-(set-face-attribute 'default nil :height 190)
+    ((add-to-list 'default-frame-alist '(undecorated . t))
+     (add-to-list 'default-frame-alist '(font . "Hack-Regular"))))
 
+(set-face-attribute 'default nil :height 190)
 (setq inhibit-startup-screen t)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
