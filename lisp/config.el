@@ -171,9 +171,11 @@
 ;; ----- Mac-specific -----
 (if (eq system-type 'darwin)
     (progn (add-to-list 'default-frame-alist '(undecorated . t))
-	   (add-to-list 'default-frame-alist '(font . "Hack-Regular"))))
+	   (set-face-attribute 'default nil
+			       :font "Hack"
+			       :height 170))
+  (set-face-attribute 'default nil :height 190))
 
-(set-face-attribute 'default nil :height 190)
 (setq inhibit-startup-screen t)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
