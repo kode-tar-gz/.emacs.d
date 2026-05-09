@@ -24,7 +24,6 @@
         ⣘⣸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣇⣀⣀⡀⣀⣠⠃⠀⠀⠀⠁⢢
 
 
-
 ██╗  ██╗ ██████╗ ██████╗ ███████╗███╗   ███╗ █████╗  ██████╗███████╗
 ██║ ██╔╝██╔═══██╗██╔══██╗██╔════╝████╗ ████║██╔══██╗██╔════╝██╔════╝
 █████╔╝ ██║   ██║██║  ██║█████╗  ██╔████╔██║███████║██║     ███████╗
@@ -112,8 +111,8 @@
         ;; Insert the buttons
         (kode-dashboard-insert-button "[ open config ]" (lambda () (interactive) (dired "~/.emacs.d/")) "~/.emacs.d/")
         (kode-dashboard-insert-button "[ be productive ]" (lambda () (interactive) (dired "~/src/")) "~/src/")
-        ;(kode-dashboard-insert-button "[ Magit ]" 'magit-status)
-        (kode-dashboard-insert-button "[ procrastinate ]" 'tetris "tetris"))
+        (kode-dashboard-insert-button "[ procrastinate ]" 'tetris "tetris")
+        (kode-dashboard-insert-button "[ restart ]" 'restart-emacs "restart-emacs"))
 
       ;; Lock down the buffer
       (read-only-mode +1)
