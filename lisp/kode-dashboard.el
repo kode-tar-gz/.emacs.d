@@ -1,4 +1,5 @@
-;; 1. Define your ASCII art
+;; DISCLAIMER: This file was made with lots of generative AI assistance.
+
 (defvar kode-dashboard-ascii
   "
         ⠀⠀⠀⠀⡌⢠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠉⠉⢳⠀⠘⠀⠀⠀

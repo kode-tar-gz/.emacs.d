@@ -170,7 +170,7 @@
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 (if (eq system-type 'darwin)
     (add-to-list 'default-frame-alist '(undecorated . t)))
-(set-face-attribute 'default nil :height 170)
+(set-face-attribute 'default nil :height 190)
 
 (setq inhibit-startup-screen t)
 (menu-bar-mode -1)
