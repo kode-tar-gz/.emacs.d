@@ -170,8 +170,8 @@
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 ;; ----- Mac-specific -----
 (if (eq system-type 'darwin)
-    ((add-to-list 'default-frame-alist '(undecorated . t))
-     (add-to-list 'default-frame-alist '(font . "Hack-Regular"))))
+    (progn (add-to-list 'default-frame-alist '(undecorated . t))
+	   (add-to-list 'default-frame-alist '(font . "Hack-Regular"))))
 
 (set-face-attribute 'default nil :height 190)
 (setq inhibit-startup-screen t)
