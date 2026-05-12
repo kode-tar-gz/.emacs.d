@@ -3,7 +3,6 @@
 (defun match-region-to-cursor ()
   "Make the selection (region) background match the cursor color."
   (interactive)
-  ;; Get the background color of the cursor face
   (let ((cursor-bg (face-background 'cursor nil t)))
     (when cursor-bg
       ;; Set the region's background to match the cursor
@@ -16,7 +15,6 @@
 ;; Trigger this function automatically right after a theme is loaded manually
 (advice-add 'load-theme :after (lambda (&rest _) (match-region-to-cursor)))
 
-;; Wait until Emacs has fully drawn the window system on startup before running
 (add-hook 'window-setup-hook #'match-region-to-cursor)
 
 ;; If you ever run Emacs as a daemon (using emacsclient), the initial frame

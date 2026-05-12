@@ -1,3 +1,6 @@
+;; WARNING: chasm-mode.el needs to be present in ~/emacs.d/lisp
+;; it's available at https://github.com/kode-tar-gz/chasm-mode
+
 ;; ----- helper function to install all needed packages on first boot -----
 (require 'package)
 (defun my-ensure-package (package)
@@ -14,6 +17,8 @@
 (package-initialize)
 
 ;; ----- ensure that every package we need is installed -----
+;; UNCOMMENT THIS IF ON A FRESH INSTALL:
+;;(package-refresh-contents)
 (my-ensure-package 'evil)
 (my-ensure-package 'evil-collection)
 (my-ensure-package 'evil-numbers)
@@ -34,8 +39,6 @@
 (my-ensure-package 'markdown-mode)
 (my-ensure-package 'markdown-preview-eww)
 (my-ensure-package 'markdown-preview-mode)
-;; UNCOMMENT THIS IF ON A FRESH INSTALL:
-;;(package-refresh-contents)
 
 ;; ----- configuration for my own files -----
 (use-package match-region-to-cursor)
@@ -43,7 +46,6 @@
 (use-package kode-dashboard
   :config
   (setq initial-buffer-choice (lambda () (get-buffer-create "*kode-dashboard*")))
-
   ;; Wait until the OS finishes drawing the fullscreen window, THEN draw the UI
   (add-hook 'window-setup-hook
             (lambda ()
