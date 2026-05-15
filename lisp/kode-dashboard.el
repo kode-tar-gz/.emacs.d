@@ -116,9 +116,19 @@
 
       ;; Lock down the buffer
       (read-only-mode +1)
-      (display-line-numbers-mode -1)
       (setq-local truncate-lines t)
       (setq-local show-trailing-whitespace nil)
+      (display-line-numbers-mode -1)
+
+      (let ((dashboard-map (make-sparse-keymap)))
+        ;; Inherit the standard special-mode keys (like 'q' to quit)
+        (set-keymap-parent dashboard-map (current-local-map))
+
+        ;; Add our custom bindings strictly to this isolated map
+        (define-key dashboard-map (kbd "TAB") 'forward-button)
+        (define-key dashboard-map (kbd "<tab>") 'forward-button)
+        (define-key dashboard-map (kbd "<backtab>") 'backward-button)
+        (use-local-map dashboard-map))
 
       ;; Activate our custom keyboard-hover engine (the 't' makes it local to this buffer only)
       (add-hook 'post-command-hook #'kode-dashboard-update-cursor-highlight nil t)
