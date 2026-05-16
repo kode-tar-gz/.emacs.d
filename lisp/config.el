@@ -29,12 +29,12 @@
 (my-ensure-package 'company)
 (my-ensure-package 'company-c-headers)
 (my-ensure-package 'rust-mode)
+(my-ensure-package 'gdscript-mode)
 (my-ensure-package 'exec-path-from-shell)
 (my-ensure-package 'quasi-monochrome-theme)
 (my-ensure-package 'doom-themes)
 (my-ensure-package 'rainbow-mode)
 (my-ensure-package 'org-bullets)
-(my-ensure-package 'rainbow-mode)
 (my-ensure-package 'move-text)
 (my-ensure-package 'hl-todo)
 (my-ensure-package 'flycheck)
@@ -47,11 +47,11 @@
 
 (use-package kode-dashboard
   :config
-  (setq initial-buffer-choice (lambda () (get-buffer-create "*kode-dashboard*")))
-  ;; Wait until the OS finishes drawing the fullscreen window, THEN draw the UI
+  ;; Wait until the OS finishes drawing the fullscreen window
   (add-hook 'window-setup-hook
             (lambda ()
-              (run-with-timer 0.1 nil #'kode-dashboard))))
+              (when (string= (buffer-name) "*scratch*")
+                (run-with-timer 0.1 nil #'kode-dashboard)))))
 
 (use-package chasm-mode
   :config
@@ -115,6 +115,11 @@
 	    (lambda ()
 	      (setq-local compile-command "cargo ")))
   (add-hook 'rust-mode-hook 'eglot-ensure))
+
+(use-package gdscript-mode
+  :config
+  ;; GODOT CONFIGURATION: emacsclient for exec path and -n -a "emacs" {file} for exec flags
+  (add-hook 'gdscript-mode-hook 'eglot-ensure))
 
 ;; ----- exec-path-from-shell: use our shell's PATH in emacs -----
 (use-package exec-path-from-shell
@@ -190,5 +195,6 @@
 (setq-default show-trailing-whitespace t)
 
 (setq gdb-many-windows 't)
+(server-start)
 
 (provide 'config)
