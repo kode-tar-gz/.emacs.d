@@ -119,6 +119,7 @@
 (use-package gdscript-mode
   :config
   ;; GODOT CONFIGURATION: emacsclient for exec path and -n -a "emacs" {file} for exec flags
+  ;; useful link: https://pixelflausen.com/gamedev/emacs-as-godot-editor
   (add-hook 'gdscript-mode-hook 'eglot-ensure))
 
 ;; ----- exec-path-from-shell: use our shell's PATH in emacs -----
