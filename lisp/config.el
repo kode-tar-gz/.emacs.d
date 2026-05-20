@@ -179,14 +179,18 @@
 ;;(add-to-list 'default-frame-alist '(font . "DejaVuSansMono-15"))
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 ;; ----- Mac-specific -----
+(load-file (concat user-emacs-directory "font.el"))
+;; remember to set font height in ~/.emacs.d/font.el file. example:
+;; (setq kode-font-size 150)
 (if (eq system-type 'darwin)
     (progn (add-to-list 'default-frame-alist '(undecorated . t))
 	   (set-face-attribute 'default nil
 			       :font "Hack"
-			       :height 170))
-  (set-face-attribute 'default nil :height 190))
+			       :height kode-font-size))
+  (set-face-attribute 'default nil :height kode-font-size))
 
 (setq inhibit-startup-screen t)
+(setq frame-resize-pixelwise t)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)

@@ -3,6 +3,7 @@ ido.last
 chasm-mode.el
 quasi-monochrome-theme.el
 custom.el
+font.el
 session.*
 *.desktop
 eln-cache/

@@ -127,6 +127,7 @@
 
 ;; ----- keybindings for specific modes -----
 (evil-define-key 'normal dired-mode-map (kbd "T") 'dired-create-empty-file)
+(evil-define-key 'insert eshell-mode-map (kbd "<return>") 'eshell-send-input)
 
 ;; -------------- END OF KEYBINDING CONFIG --------------
 ;; ------------------------------------------------------
