@@ -79,6 +79,12 @@
   :custom
   (compile-command ""))
 
+(use-package eshell
+  :config
+  (add-hook 'eshell-mode-hook
+	    (lambda ()
+	      (setq-local show-trailing-whitespace nil))))
+
 (use-package eglot
   :bind (:map eglot-mode-map
 	 ("C-c C-h" . #'eldoc-doc-buffer)))
@@ -175,13 +181,12 @@
 
 ;; ----- Theming! We can disable a lot of things to make emacs prettier -----
 (load-theme 'doom-horizon t)
-;; On Linux:
-;;(add-to-list 'default-frame-alist '(font . "DejaVuSansMono-15"))
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
-;; ----- Mac-specific -----
-(load-file (concat user-emacs-directory "font.el"))
+
+;; ----- Font! -----
 ;; remember to set font height in ~/.emacs.d/font.el file. example:
 ;; (setq kode-font-size 150)
+(load-file (concat user-emacs-directory "font.el"))
 (if (eq system-type 'darwin)
     (progn (add-to-list 'default-frame-alist '(undecorated . t))
 	   (set-face-attribute 'default nil
@@ -189,6 +194,7 @@
 			       :height kode-font-size))
   (set-face-attribute 'default nil :height kode-font-size))
 
+;; ----- Other small graphical details -----
 (setq inhibit-startup-screen t)
 (setq frame-resize-pixelwise t)
 (menu-bar-mode -1)
