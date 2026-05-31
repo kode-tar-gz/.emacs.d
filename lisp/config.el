@@ -51,6 +51,11 @@
   (add-hook 'window-setup-hook
             (lambda ()
               (when (string= (buffer-name) "*scratch*")
+                (run-with-timer 0.1 nil #'kode-dashboard))))
+  (add-hook 'after-make-frame-functions
+	    (lambda (frame)
+	      (select-frame frame)
+	      (when (display-graphic-p)
                 (run-with-timer 0.1 nil #'kode-dashboard)))))
 
 (use-package chasm-mode
