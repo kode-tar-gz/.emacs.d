@@ -70,6 +70,13 @@
 
 (use-package magit
   :config
+  (defun magit-dotfiles ()
+    "Launch Magit for the bare dotfiles repository."
+    (interactive)
+    (let ((process-environment (copy-sequence process-environment)))
+      (setenv "GIT_DIR" (expand-file-name "~/.dotfiles/"))
+      (setenv "GIT_WORK_TREE" (expand-file-name "~"))
+      (magit-status (expand-file-name "~"))))
   (add-hook 'magit-mode-hook 'auto-revert-mode))
 
 (use-package dired
@@ -189,15 +196,15 @@
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 ;; ----- Font! -----
-;; remember to set font height in ~/.emacs.d/font.el file. example:
+;; remember to set font name and height in ~/.emacs.d/font.el file. example:
 ;; (setq kode-font-size 150)
+;; (setq kode-font-name "Hack")
+;; Bitmap font that I like: GohuFont
+;; Vector font that I like: Hack
 (load-file (concat user-emacs-directory "font.el"))
-(if (eq system-type 'darwin)
-    (progn (add-to-list 'default-frame-alist '(undecorated . t))
-	   (set-face-attribute 'default nil
-			       :font "Hack"
-			       :height kode-font-size))
-  (set-face-attribute 'default nil :height kode-font-size))
+(set-face-attribute 'default nil
+		    :font kode-font-name
+		    :height kode-font-size)
 
 ;; ----- Other small graphical details -----
 (setq inhibit-startup-screen t)
