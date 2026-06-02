@@ -70,13 +70,6 @@
 
 (use-package magit
   :config
-  (defun magit-dotfiles ()
-    "Launch Magit for the bare dotfiles repository."
-    (interactive)
-    (let ((process-environment (copy-sequence process-environment)))
-      (setenv "GIT_DIR" (expand-file-name "~/.dotfiles/"))
-      (setenv "GIT_WORK_TREE" (expand-file-name "~"))
-      (magit-status (expand-file-name "~"))))
   (add-hook 'magit-mode-hook 'auto-revert-mode))
 
 (use-package dired
