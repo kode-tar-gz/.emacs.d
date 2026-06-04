@@ -134,9 +134,9 @@
       (add-hook 'post-command-hook #'kode-dashboard-update-cursor-highlight nil t)
 
       ;; Move cursor to the first button
+      (switch-to-buffer buf)
       (goto-char (point-min))
-      (forward-button 1))
+      (forward-button 1))))
 
     ;; Finally, display the buffer
-    (switch-to-buffer buf)))
 (provide 'kode-dashboard)
