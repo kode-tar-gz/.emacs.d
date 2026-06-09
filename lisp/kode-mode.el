@@ -95,6 +95,7 @@
 (define-key kode-mode-map (kbd "C-c C-e")   'eval-region)
 (define-key kode-mode-map (kbd "C-c C-v")   'grep)
 (define-key kode-mode-map (kbd "C-c C-S-f") 'uncomment-region)
+(define-key kode-mode-map (kbd "C-c C-t")   'transpose-words)
 (define-key kode-mode-map (kbd "C-c C-f")   'find-file-at-point)
 (define-key kode-mode-map (kbd "C-c C-d")   'my-dired-at-point)
 (define-key kode-mode-map (kbd "C-x C-d")   'ido-dired)
