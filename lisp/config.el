@@ -211,6 +211,7 @@
 (setq-default show-trailing-whitespace t)
 
 (setq gdb-many-windows 't)
+(setq make-backup-files nil)
 (server-start)
 
 (provide 'config)
