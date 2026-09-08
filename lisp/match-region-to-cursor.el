@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;; DISCLAIMER: This file is almost completely written with AI.
 
 (defun match-region-to-cursor ()

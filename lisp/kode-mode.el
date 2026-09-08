@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;; My custom minor mode, mainly used for overriding keybindings.
 ;; DISCLAIMER: A lot of my custom functions in this file are
 ;; made with AI (gemini, mostly). Everything else is me, however.

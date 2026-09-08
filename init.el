@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 (require 'config)
 (require 'kode-mode)
