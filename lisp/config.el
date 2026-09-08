@@ -28,6 +28,7 @@
 (my-ensure-package 'which-key)
 (my-ensure-package 'company)
 (my-ensure-package 'company-c-headers)
+(my-ensure-package 'cmake-mode)
 (my-ensure-package 'rust-mode)
 (my-ensure-package 'gdscript-mode)
 (my-ensure-package 'exec-path-from-shell)
