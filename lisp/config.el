@@ -50,16 +50,7 @@
 
 (use-package kode-dashboard
   :config
-  ;; Wait until the OS finishes drawing the fullscreen window
-  (add-hook 'window-setup-hook
-            (lambda ()
-              (when (string= (buffer-name) "*scratch*")
-                (run-with-timer 0.1 nil #'kode-dashboard))))
-  (add-hook 'after-make-frame-functions
-	    (lambda (frame)
-	      (select-frame frame)
-	      (when (display-graphic-p)
-                (run-with-timer 0.1 nil #'kode-dashboard)))))
+  (add-hook 'emacs-startup-hook #'kode-dashboard))
 
 (use-package chasm-mode
   :config
@@ -72,6 +63,7 @@
   (global-auto-revert-mode 1))
 
 (use-package magit
+  :defer t
   :config
   (add-hook 'magit-mode-hook 'auto-revert-mode))
 
@@ -199,6 +191,7 @@
 
 ;; ----- flycheck: a requirement for company-mode on mac, apparently -----
 (use-package flycheck
+  :defer t
   :if (eq system-type 'mac))
 
 ;; ----- markdown-mode: pretty self-explanatory. we also get some packages to view formatted markdown -----

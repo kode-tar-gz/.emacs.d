@@ -88,56 +88,75 @@
       ;; If not on a button, hide the overlay at the very start of the buffer
       (move-overlay kode-dashboard--cursor-overlay 0 0 (current-buffer)))))
 
-;; 5. The main function to draw the dashboard
+;; NEW: Separate rendering logic so it redraws cleanly on resize
+(defun kode-dashboard-render (&optional _)
+  "Erase and redraw the dashboard based on current window dimensions."
+  (let ((win (get-buffer-window "*kode-dashboard*")))
+    (when win
+      ;; Temporarily make the dashboard window the "selected" one so that
+      ;; (window-width) and (window-height) calculate the correct padding
+      (with-selected-window win
+        (let ((inhibit-read-only t)
+              ;; Save the button label we are currently hovering to restore point later
+              (saved-label (when (button-at (point))
+                             (button-label (button-at (point))))))
+          (erase-buffer)
+          (remove-overlays)
+
+          ;; Insert ASCII art near the top
+          (kode-dashboard-insert-ascii kode-dashboard-ascii)
+
+          ;; Calculate dynamic vertical padding
+          (let* ((current-line (line-number-at-pos))
+                 (target-line (/ (window-height) 2))
+                 (pad-lines (max 2 (- target-line current-line))))
+            (insert (make-string pad-lines ?\n)))
+
+          ;; Insert the buttons
+          (kode-dashboard-insert-button "[ open config ]"   (lambda () (interactive) (dired "~/.emacs.d/")) "~/.emacs.d/")
+          (kode-dashboard-insert-button "[ be productive ]" (lambda () (interactive) (dired "~/src/")) "~/src/")
+          (kode-dashboard-insert-button "[ procrastinate ]" 'tetris "tetris")
+          (kode-dashboard-insert-button "[ restart ]"       'restart-emacs "restart-emacs")
+
+          ;; Restore cursor position
+          (goto-char (point-min))
+          (let ((found nil))
+            (if saved-label
+                (while (and (not found) (forward-button 1))
+                  (when (string= (button-label (button-at (point))) saved-label)
+                    (setq found t)))
+              (forward-button 1)))
+
+          ;; Ensure the visual highlight reappears after redrawing
+          (kode-dashboard-update-cursor-highlight))))))
+
+;; 5. The main function to setup the dashboard
 (defun kode-dashboard ()
-  "Generate a minimal, centered custom dashboard."
+  "Generate and display a minimal, centered custom dashboard."
   (interactive)
   (let ((buf (get-buffer-create "*kode-dashboard*")))
     (with-current-buffer buf
       (special-mode)
-      (let ((inhibit-read-only t))
-        (erase-buffer)
-	(remove-overlays)
-
-        ;; Insert ASCII art near the top
-        (kode-dashboard-insert-ascii kode-dashboard-ascii)
-
-        ;; Calculate dynamic vertical padding to push buttons to the middle
-        (let* ((current-line (line-number-at-pos))
-               (target-line (/ (window-height) 2))
-               ;; Ensure at least 2 lines of gap if ASCII art is very tall
-               (pad-lines (max 2 (- target-line current-line))))
-          (insert (make-string pad-lines ?\n)))
-
-        ;; Insert the buttons
-        (kode-dashboard-insert-button "[ open config ]"   (lambda () (interactive) (dired "~/.emacs.d/")) "~/.emacs.d/")
-        (kode-dashboard-insert-button "[ be productive ]" (lambda () (interactive) (dired "~/src/")) "~/src/")
-        (kode-dashboard-insert-button "[ procrastinate ]" 'tetris "tetris")
-        (kode-dashboard-insert-button "[ restart ]"       'restart-emacs "restart-emacs"))
-
-      ;; Lock down the buffer
       (read-only-mode +1)
       (setq-local truncate-lines t)
       (setq-local show-trailing-whitespace nil)
       (display-line-numbers-mode -1)
 
       (let ((dashboard-map (make-sparse-keymap)))
-        ;; Inherit the standard special-mode keys (like 'q' to quit)
         (set-keymap-parent dashboard-map (current-local-map))
-
-        ;; Add our custom bindings strictly to this isolated map
         (define-key dashboard-map (kbd "TAB") 'forward-button)
         (define-key dashboard-map (kbd "<tab>") 'forward-button)
         (define-key dashboard-map (kbd "<backtab>") 'backward-button)
         (use-local-map dashboard-map))
 
-      ;; Activate our custom keyboard-hover engine (the 't' makes it local to this buffer only)
+      ;; Hooks
       (add-hook 'post-command-hook #'kode-dashboard-update-cursor-highlight nil t)
+      ;; Bind the resize hook strictly locally to this buffer
+      (add-hook 'window-size-change-functions #'kode-dashboard-render nil t))
 
-      ;; Move cursor to the first button
-      (switch-to-buffer buf)
-      (goto-char (point-min))
-      (forward-button 1))))
+    (switch-to-buffer buf)
+    ;; Trigger the initial draw now that the buffer is actually visible in a window
+    (kode-dashboard-render)
+    buf)) ;; Return the buffer
 
-    ;; Finally, display the buffer
 (provide 'kode-dashboard)
