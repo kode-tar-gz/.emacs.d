@@ -95,6 +95,7 @@
 (define-key kode-mode-map (kbd "C-c C-c")   'my-smart-compile)
 (define-key kode-mode-map (kbd "C-c C-e")   'eval-region)
 (define-key kode-mode-map (kbd "C-c C-v")   'grep)
+(define-key kode-mode-map (kbd "C-c C-b")   'rgrep)
 (define-key kode-mode-map (kbd "C-c C-S-f") 'uncomment-region)
 (define-key kode-mode-map (kbd "C-c C-t")   'transpose-words)
 (define-key kode-mode-map (kbd "C-c C-f")   'find-file-at-point)
@@ -117,10 +118,10 @@
 (evil-define-key 'insert kode-mode-map (kbd "C-x C-c") 'evil-normal-state)
 (evil-define-key 'insert kode-mode-map (kbd "C-p")     'evil-paste-after)
 ;; these bindings arent needed when im using my split keyboard
-;;(evil-define-key 'insert kode-mode-map (kbd "M-h")     'left-char)
-;;(evil-define-key 'insert kode-mode-map (kbd "M-j")     'next-line)
-;;(evil-define-key 'insert kode-mode-map (kbd "M-k")     'previous-line)
-;;(evil-define-key 'insert kode-mode-map (kbd "M-l")     'right-char)
+(evil-define-key 'insert kode-mode-map (kbd "M-h")     'left-char)
+(evil-define-key 'insert kode-mode-map (kbd "M-j")     'next-line)
+(evil-define-key 'insert kode-mode-map (kbd "M-k")     'previous-line)
+(evil-define-key 'insert kode-mode-map (kbd "M-l")     'right-char)
 
 ;; ----- visual mode keybindings -----
 (evil-define-key 'visual kode-mode-map (kbd "C-x C-c") 'evil-normal-state)
