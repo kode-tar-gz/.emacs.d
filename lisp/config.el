@@ -43,6 +43,7 @@
 (my-ensure-package 'markdown-mode)
 (my-ensure-package 'markdown-preview-eww)
 (my-ensure-package 'markdown-preview-mode)
+(my-ensure-package 'gptel)
 
 ;; ----- configuration for my own files -----
 (use-package match-region-to-cursor)
@@ -120,6 +121,30 @@
   :config
   (add-hook 'after-init-hook 'global-company-mode)
   (use-package company-c-headers))
+
+;; ----- gtpel: LLM client in Emacs. Exclusively for local models and I use it mostly for writing. -----
+(use-package gptel
+  :ensure t
+  :config
+  (setq-default gptel-backend
+                (gptel-make-ollama "Ollama"
+                  :host "localhost:11434"
+                  :stream t
+                  :models '(qwen2.5:7b qwen2.5:3b)))
+
+  (setq-default gptel-model 'qwen2.5:3b)
+
+  ;; Define custom academic personas
+  (setq gptel-directives
+        '((default . "You are a large language model and a helpful assistant.")
+          (tutor . "You are an expert academic tutor. Do not just give the answer. Use the Socratic method to guide me to the answer. Explain underlying concepts clearly, avoid jargon unless defining it, and ask probing questions to test my understanding.")
+          (researcher . "You are a post-doc research assistant. Help me synthesize information, identify gaps in arguments, format citations, and structure academic prose. Be highly critical of logical fallacies.")
+          (editor . "You are a strict academic editor. Review the provided text for clarity, flow, and structural integrity. Point out awkward phrasing and suggest more precise academic vocabulary without changing the core meaning.")
+          (corrector . "You are a bilingual editor. Correct the grammar and punctuation of this text (French or English). Output ONLY the corrected text, no explanations.")))
+
+  ;; Map the system prompt selection menu
+  (define-key global-map (kbd "C-c s") 'gptel-system-prompt)
+  (define-key global-map (kbd "C-c RET") 'gptel-menu))
 
 ;; ----- rust-mode: always use cargo for compiling (who needs cargo-mode?) -----
 (use-package rust-mode

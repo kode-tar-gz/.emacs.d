@@ -90,13 +90,12 @@
 
 ;; ----- custom keybindings, applied to all buffers -----
 (define-key kode-mode-map (kbd "C-c e")     'my-open-eshell-below)
-(define-key kode-mode-map (kbd "C-c s")     'my-open-eshell-right)
+(define-key kode-mode-map (kbd "C-c r")     'my-open-eshell-right)
 (define-key kode-mode-map (kbd "C-c m")     'man)
 (define-key kode-mode-map (kbd "C-c C-c")   'my-smart-compile)
 (define-key kode-mode-map (kbd "C-c C-e")   'eval-region)
 (define-key kode-mode-map (kbd "C-c C-v")   'grep)
 (define-key kode-mode-map (kbd "C-c C-b")   'rgrep)
-(define-key kode-mode-map (kbd "C-c C-S-f") 'uncomment-region)
 (define-key kode-mode-map (kbd "C-c C-t")   'transpose-words)
 (define-key kode-mode-map (kbd "C-c C-f")   'find-file-at-point)
 (define-key kode-mode-map (kbd "C-c C-d")   'my-dired-at-point)
@@ -104,7 +103,6 @@
 (define-key kode-mode-map (kbd "C-x C-h")   'previous-buffer)
 (define-key kode-mode-map (kbd "C-x C-l")   'next-buffer)
 (define-key kode-mode-map (kbd "C-x C-s")   (lambda () (interactive) (switch-to-buffer "*scratch*")))
-(define-key kode-mode-map (kbd "C-x C-q")   'delete-frame)
 
 ;; ----- normal mode keybindings -----
 (evil-define-key 'normal kode-mode-map (kbd "M-k")     'move-text-up)
