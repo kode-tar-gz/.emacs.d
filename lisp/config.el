@@ -132,6 +132,8 @@
   ;; useful link: https://pixelflausen.com/gamedev/emacs-as-godot-editor
   (add-hook 'gdscript-mode-hook 'eglot-ensure))
 
+(use-package cmake-mode)
+
 ;; ----- exec-path-from-shell: use our shell's PATH in emacs -----
 (use-package exec-path-from-shell
   :unless (eq system-type 'windows-nt)
