@@ -2,13 +2,6 @@
 ;; WARNING: chasm-mode.el needs to be present in ~/emacs.d/lisp
 ;; it's available at https://github.com/kode-tar-gz/chasm-mode
 
-;; ----- helper function to install all needed packages on first boot -----
-(require 'package)
-(defun my-ensure-package (package)
-  "Install PACKAGE if it is not already installed."
-  (unless (package-installed-p package)
-    (package-install package)))
-
 ;; ------------------------------------------------------
 ;; -------------- START OF PACKAGES CONFIG --------------
 
@@ -17,42 +10,28 @@
              '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
-;; ----- ensure that every package we need is installed -----
-;; UNCOMMENT THIS IF ON A FRESH INSTALL:
-;;(package-refresh-contents)
-(my-ensure-package 'evil)
-(my-ensure-package 'evil-collection)
-(my-ensure-package 'evil-numbers)
-(my-ensure-package 'magit)
-(my-ensure-package 'eglot)
-(my-ensure-package 'restart-emacs)
-(my-ensure-package 'which-key)
-(my-ensure-package 'company)
-(my-ensure-package 'company-c-headers)
-(my-ensure-package 'cmake-mode)
-(my-ensure-package 'rust-mode)
-(my-ensure-package 'gdscript-mode)
-(my-ensure-package 'exec-path-from-shell)
-(my-ensure-package 'quasi-monochrome-theme)
-(my-ensure-package 'doom-themes)
-(my-ensure-package 'rainbow-mode)
-(my-ensure-package 'org-bullets)
-(my-ensure-package 'move-text)
-(my-ensure-package 'hl-todo)
-(my-ensure-package 'flycheck)
-(my-ensure-package 'markdown-mode)
-(my-ensure-package 'markdown-preview-eww)
-(my-ensure-package 'markdown-preview-mode)
-(my-ensure-package 'gptel)
+;; why didn't I know about this sooner...
+(setq use-package-always-ensure t)
 
 ;; ----- configuration for my own files -----
-(use-package match-region-to-cursor)
+(use-package match-region-to-cursor
+  :ensure nil)
 
 (use-package kode-dashboard
+  :ensure nil
   :config
-  (add-hook 'emacs-startup-hook #'kode-dashboard))
+  (add-hook 'window-setup-hook
+            (lambda ()
+              (when (string= (buffer-name) "*scratch*")
+                (run-with-timer 0.1 nil #'kode-dashboard))))
+  (add-hook 'after-make-frame-functions
+	    (lambda (frame)
+	      (select-frame frame)
+	      (when (display-graphic-p)
+                (run-with-timer 0.1 nil #'kode-dashboard)))))
 
 (use-package chasm-mode
+  :ensure nil
   :config
   ;; we turn off rainbow mode because it thinks constants are colors
   (add-hook 'chasm-mode-hook (lambda ()(rainbow-mode -1))))
@@ -68,6 +47,7 @@
   (add-hook 'magit-mode-hook 'auto-revert-mode))
 
 (use-package dired
+  :ensure nil
   :custom
   ;; make dired try to guess the target when moving / copying
   (dired-dwim-target 't)
@@ -116,7 +96,6 @@
 
 ;; ----- gtpel: LLM client in Emacs. Exclusively for local models and I use it mostly for writing. -----
 (use-package gptel
-  :ensure t
   :config
   (setq-default gptel-backend
                 (gptel-make-ollama "Ollama"
@@ -162,7 +141,7 @@
 ;; ----- our color themes! -----
 (use-package quasi-monochrome-theme)
 (use-package doom-themes
-  :ensure t :defer t
+  :defer t
   :custom
   (doom-themes-enable-bold t)
   (doom-themes-enable-italic t)
