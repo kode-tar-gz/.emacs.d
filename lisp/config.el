@@ -113,6 +113,7 @@
           (editor . "You are a strict academic editor. Review the provided text for clarity, flow, and structural integrity. Point out awkward phrasing and suggest more precise academic vocabulary without changing the core meaning.")
           (corrector . "You are a bilingual editor. Correct the grammar and punctuation of this text (French or English). Output ONLY the corrected text, no explanations.")))
 
+  (setq gptel-log-level 'info)
   ;; Map the system prompt selection menu
   (define-key global-map (kbd "C-c s") 'gptel-system-prompt)
   (define-key global-map (kbd "C-c RET") 'gptel-menu))
