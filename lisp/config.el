@@ -6,6 +6,7 @@
 ;; -------------- START OF PACKAGES CONFIG --------------
 
 ;; ----- set up melpa -----
+(require 'package)
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
@@ -82,11 +83,18 @@
   :config
   (evil-mode 1))
 (use-package evil-numbers
-  :after (evil))
+  :after (evil)
+  :config
+  :bind (:map evil-normal-state-map
+	      (("C-c =" . #'evil-numbers/inc-at-pt)
+	      ("C-c -" . #'evil-numbers/dec-at-pt)
+	      ("C-c C-=" . #'evil-numbers/inc-at-pt-incremental)
+	      ("C-c C--" . #'evil-numbers/dec-at-pt-incremental))))
 (use-package evil-collection
   :after (evil)
   :config
-  (evil-collection-init))
+  (evil-collection-init)
+(use-package evil-surround))
 
 ;; ----- company: our simple autocomplete -----
 (use-package company
@@ -98,7 +106,7 @@
 (use-package gptel
   :config
   (setq-default gptel-backend
-                (gptel-make-ollama "Ollama"
+                (gptel-make-ollama "ollama"
                   :host "localhost:11434"
                   :stream t
                   :models '(qwen2.5:7b qwen2.5:3b)))
