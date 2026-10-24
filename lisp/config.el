@@ -16,7 +16,15 @@
 
 ;; ----- configuration for my own files -----
 (use-package match-region-to-cursor
-  :ensure nil)
+  :ensure nil
+  :config
+  ;; Trigger this function automatically right after a theme is loaded manually
+  ;(advice-add 'load-theme :after (lambda (&rest _) (match-region-to-cursor)))
+  ;(add-hook 'window-setup-hook #'match-region-to-cursor)
+  ;; If you ever run Emacs as a daemon (using emacsclient), the initial frame
+  ;; doesn't exist at startup. This ensures the color syncs when the client connects.
+  ;(add-hook 'server-after-make-frame-hook #'match-region-to-cursor)
+  )
 
 (use-package kode-dashboard
   :ensure nil
@@ -82,19 +90,25 @@
   (setq evil-respect-visual-line-mode t)
   :config
   (evil-mode 1))
+
 (use-package evil-numbers
   :after (evil)
   :config
   :bind (:map evil-normal-state-map
 	      (("C-c =" . #'evil-numbers/inc-at-pt)
-	      ("C-c -" . #'evil-numbers/dec-at-pt)
-	      ("C-c C-=" . #'evil-numbers/inc-at-pt-incremental)
-	      ("C-c C--" . #'evil-numbers/dec-at-pt-incremental))))
+	       ("C-c -" . #'evil-numbers/dec-at-pt)
+	       ("C-c C-=" . #'evil-numbers/inc-at-pt-incremental)
+	       ("C-c C--" . #'evil-numbers/dec-at-pt-incremental))))
+
 (use-package evil-collection
   :after (evil)
   :config
-  (evil-collection-init)
-(use-package evil-surround))
+  (evil-collection-init))
+
+(use-package evil-surround
+  :after (evil-collection)
+  :config
+  (global-evil-surround-mode 1))
 
 ;; ----- company: our simple autocomplete -----
 (use-package company
@@ -109,7 +123,7 @@
                 (gptel-make-ollama "ollama"
                   :host "localhost:11434"
                   :stream t
-                  :models '(qwen2.5:7b qwen2.5:3b)))
+                  :models '(qwen2.5:7b qwen2.5-coder:7b qwen2.5:3b)))
 
   (setq-default gptel-model 'qwen2.5:3b)
 

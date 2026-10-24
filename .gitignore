@@ -6,6 +6,7 @@ custom.el
 font.el
 session.*
 *.desktop
+tramp
 eln-cache/
 elpa/
 elpaca/

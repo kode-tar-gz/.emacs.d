@@ -12,14 +12,4 @@
       ;; This line forces the text inside your selection to match the
       ;; background color, ensuring high contrast.
       (set-face-attribute 'region nil :foreground (face-background 'default nil t)))))
-
-;; Trigger this function automatically right after a theme is loaded manually
-(advice-add 'load-theme :after (lambda (&rest _) (match-region-to-cursor)))
-
-(add-hook 'window-setup-hook #'match-region-to-cursor)
-
-;; If you ever run Emacs as a daemon (using emacsclient), the initial frame
-;; doesn't exist at startup. This ensures the color syncs when the client connects.
-(add-hook 'server-after-make-frame-hook #'match-region-to-cursor)
-
 (provide 'match-region-to-cursor)
