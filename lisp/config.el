@@ -116,6 +116,13 @@
   (add-hook 'after-init-hook 'global-company-mode)
   (use-package company-c-headers))
 
+(use-package multiple-cursors
+  :config
+  (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+  (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+  (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+  (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this))
+
 ;; ----- gtpel: LLM client in Emacs. Exclusively for local models and I use it mostly for writing. -----
 (use-package gptel
   :config

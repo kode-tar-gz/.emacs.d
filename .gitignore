@@ -1,4 +1,5 @@
 *~
+.mc-lists.el
 ido.last
 chasm-mode.el
 quasi-monochrome-theme.el
