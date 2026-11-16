@@ -2,6 +2,12 @@
 ;; WARNING: chasm-mode.el needs to be present in ~/emacs.d/lisp
 ;; it's available at https://github.com/kode-tar-gz/chasm-mode
 
+(defun my-lisp-setup ()
+  "Turn on my preferred minor modes for Lisp programming"
+  (rainbow-delimiters-mode 1)
+  (smartparens-mode 1)
+  (evil-smartparens-mode 1))
+
 ;; ------------------------------------------------------
 ;; -------------- START OF PACKAGES CONFIG --------------
 
@@ -83,6 +89,10 @@
   (ido-mode 1)
   (ido-everywhere 1))
 
+(use-package lisp-mode
+  :ensure nil
+  :hook (emacs-lisp-mode . my-lisp-setup))
+
 ;; ----- evil: for Vim keybindings in emacs (heresy, i know..) -----
 (use-package evil
   :init
@@ -119,7 +129,7 @@
 (use-package multiple-cursors
   :config
   (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-  (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+  (global-set-key (kbd "C->") 'mc/mark-next-like-this-word)
   (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
   (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this))
 
@@ -147,6 +157,7 @@
   (define-key global-map (kbd "C-c s") 'gptel-system-prompt)
   (define-key global-map (kbd "C-c RET") 'gptel-menu))
 
+;; ----- Support for different languages -----
 ;; ----- rust-mode: always use cargo for compiling (who needs cargo-mode?) -----
 (use-package rust-mode
   :config
@@ -162,6 +173,14 @@
   (add-hook 'gdscript-mode-hook 'eglot-ensure))
 
 (use-package cmake-mode)
+
+(use-package racket-mode
+  :hook (racket-mode . my-lisp-setup))
+
+;; ----- Lisp-related packages -----
+(use-package rainbow-delimiters)
+(use-package smartparens)
+(use-package evil-smartparens)
 
 ;; ----- exec-path-from-shell: use our shell's PATH in emacs -----
 (use-package exec-path-from-shell
