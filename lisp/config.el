@@ -34,12 +34,11 @@
 
 (use-package kode-dashboard
   :ensure nil
-  :config
-  (add-hook 'window-setup-hook
+  :hook (window-setup-hook .
             (lambda ()
               (when (string= (buffer-name) "*scratch*")
                 (run-with-timer 0.1 nil #'kode-dashboard))))
-  (add-hook 'after-make-frame-functions
+  :hook (after-make-frame-functions .
 	    (lambda (frame)
 	      (select-frame frame)
 	      (when (display-graphic-p)
@@ -47,9 +46,8 @@
 
 (use-package chasm-mode
   :ensure nil
-  :config
   ;; we turn off rainbow mode because it thinks constants are colors
-  (add-hook 'chasm-mode-hook (lambda ()(rainbow-mode -1))))
+  :hook (chasm-mode . (lambda ()(rainbow-mode -1))))
 
 ;; ----- configuration for some built-in packages -----
 (use-package autorevert
@@ -58,25 +56,22 @@
 
 (use-package magit
   :defer t
-  :config
-  (add-hook 'magit-mode-hook 'auto-revert-mode))
+  :hook (magit-mode . auto-revert-mode))
 
 (use-package dired
   :ensure nil
+  :hook (dired-mode . auto-revert-mode)
   :custom
   ;; make dired try to guess the target when moving / copying
   (dired-dwim-target 't)
-  (dired-listing-switches "-alh")
-  :config
-  (add-hook 'dired-mode-hook 'auto-revert-mode))
+  (dired-listing-switches "-alh"))
 
 (use-package compile
   :custom
   (compile-command ""))
 
 (use-package eshell
-  :config
-  (add-hook 'eshell-mode-hook
+  :hook (eshell-mode .
 	    (lambda ()
 	      (setq-local show-trailing-whitespace nil))))
 
@@ -122,8 +117,8 @@
 
 ;; ----- company: our simple autocomplete -----
 (use-package company
+  :hook (after-init . global-company-mode)
   :config
-  (add-hook 'after-init-hook 'global-company-mode)
   (use-package company-c-headers))
 
 (use-package multiple-cursors
@@ -160,17 +155,14 @@
 ;; ----- Support for different languages -----
 ;; ----- rust-mode: always use cargo for compiling (who needs cargo-mode?) -----
 (use-package rust-mode
+  :hook (rust-mode . eglot-ensure)
   :config
-  (add-hook 'rust-mode-hook
-	    (lambda ()
-	      (setq-local compile-command "cargo ")))
-  (add-hook 'rust-mode-hook 'eglot-ensure))
+  (add-hook 'rust-mode-hook (lambda () (setq-local compile-command "cargo "))))
 
 (use-package gdscript-mode
-  :config
   ;; GODOT CONFIGURATION: emacsclient for exec path and -n -a "emacs" {file} for exec flags
   ;; useful link: https://pixelflausen.com/gamedev/emacs-as-godot-editor
-  (add-hook 'gdscript-mode-hook 'eglot-ensure))
+  :hook (gdscript-mode . eglot-ensure))
 
 (use-package cmake-mode)
 
@@ -208,10 +200,9 @@
 
 ;; ----- org-bullets: pretty org-mode headers and such -----
 (use-package org-bullets
+  :hook (org-mode . org-bullets-mode)
   :custom
-  (org-edit-src-content-indentation 0)
-  :config
-  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+  (org-edit-src-content-indentation 0))
 
 ;; ----- theming thingies. rainbow-mode for color codes and hl-todo for TODO -----
 (use-package rainbow-mode)
@@ -226,8 +217,7 @@
 
 ;; ----- markdown-mode: pretty self-explanatory. we also get some packages to view formatted markdown -----
 (use-package markdown-mode
-  :config
-  (add-hook 'markdown-mode-hook 'visual-line-mode))
+  :hook (markdown-mode . visual-line-mode))
 (use-package markdown-preview-eww)
 (use-package markdown-preview-mode)
 
