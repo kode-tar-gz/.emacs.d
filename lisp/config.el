@@ -166,6 +166,8 @@
 
 (use-package cmake-mode)
 
+(use-package glsl-mode)
+
 (use-package racket-mode
   :hook (racket-mode . my-lisp-setup))
 
