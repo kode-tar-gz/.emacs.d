@@ -59,6 +59,7 @@
   "Context-aware compile.
    In wdired: finish edit.
    In magit-commit: finish commit.
+   In racket-mode: racket-run-module-at-point.
    Otherwise: compile."
   (interactive)
   (cond
@@ -68,6 +69,9 @@
    ((or (derived-mode-p 'git-commit-mode)
         (bound-and-true-p with-editor-mode))
     (with-editor-finish nil))
+
+   ((or (derived-mode-p 'racket-mode))
+    (racket-run-module-at-point))
 
    (t
     (call-interactively 'compile))))
