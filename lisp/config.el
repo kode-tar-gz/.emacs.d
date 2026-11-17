@@ -225,6 +225,8 @@
 
 ;; UNCOMMENT THIS IF ON A FRESH INSTALL:
 ;;(package-refresh-contents)
+;; If you get all the autoload bugs, use this command
+;; to compile everything without the GUI: emacs --batch --load ~/.emacs.d/init.el
 
 ;; -------------- END OF PACKAGES CONFIG --------------
 ;; ----------------------------------------------------
