@@ -49,6 +49,16 @@
   ;; we turn off rainbow mode because it thinks constants are colors
   :hook (chasm-mode . (lambda ()(rainbow-mode -1))))
 
+(use-package compuni
+  :ensure nil
+  :load-path "~/.emacs.d/lisp/compuni"
+  :after company
+  :commands (compuni-insert-unicode compuni-insert-emoji)
+  :bind (("C-c u u" . compuni-insert-unicode)
+         ("C-c u e" . compuni-insert-emoji))
+  :custom
+  (compuni-max-candidates 50))
+
 ;; ----- configuration for some built-in packages -----
 (use-package autorevert
   :config
@@ -225,8 +235,7 @@
 
 ;; UNCOMMENT THIS IF ON A FRESH INSTALL:
 ;;(package-refresh-contents)
-;; If you get all the autoload bugs, use this command
-;; to compile everything without the GUI: emacs --batch --load ~/.emacs.d/init.el
+;; If you get all the autoload bugs, use the init.sh script
 
 ;; -------------- END OF PACKAGES CONFIG --------------
 ;; ----------------------------------------------------
