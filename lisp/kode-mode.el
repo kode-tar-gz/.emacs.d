@@ -84,12 +84,12 @@
 (add-hook 'minibuffer-setup-hook 'turn-off-kode-mode)
 
 ;; ----- unbinding annoying keybindings -----
-(define-key global-map (kbd "C-x C-k RET") 'nil)
-(define-key global-map (kbd "C-x C-c") 'nil)
-(define-key global-map (kbd "M-j") 'nil)
-(define-key global-map (kbd "M-k") 'nil)
-(define-key global-map (kbd "s-x") 'nil)
-(define-key global-map (kbd "C-_") 'nil)
+(define-key global-map (kbd "C-x C-k RET")   'nil)
+(define-key global-map (kbd "C-x C-c")       'nil)
+(define-key global-map (kbd "M-j")           'nil)
+(define-key global-map (kbd "M-k")           'nil)
+(define-key global-map (kbd "s-x")           'nil)
+(define-key global-map (kbd "C-_")           'nil)
 (define-key evil-motion-state-map (kbd "\\") 'nil)
 
 ;; ----- custom keybindings, applied to all buffers -----
@@ -131,7 +131,6 @@
 (evil-define-key 'visual kode-mode-map (kbd "M-j")     'move-text-down)
 
 ;; ----- keybindings for specific modes -----
-(evil-define-key 'normal dired-mode-map (kbd "T") 'dired-create-empty-file)
 (evil-define-key 'insert eshell-mode-map (kbd "<return>") 'eshell-send-input)
 
 ;; -------------- END OF KEYBINDING CONFIG --------------

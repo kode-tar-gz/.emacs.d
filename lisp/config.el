@@ -71,6 +71,7 @@
 (use-package dired
   :ensure nil
   :hook (dired-mode . auto-revert-mode)
+  :hook (dired-mode . (lambda() (evil-define-key* 'normal 'local (kbd "T") #'dired-create-empty-file)))
   :custom
   ;; make dired try to guess the target when moving / copying
   (dired-dwim-target 't)
@@ -96,6 +97,9 @@
 
 (use-package lisp-mode
   :ensure nil
+;;:after (:all rainbow-delimiters-mode
+;;	       smartparens-mode
+;;	       evil-smartparens-mode)
   :hook (emacs-lisp-mode . my-lisp-setup))
 
 ;; ----- evil: for Vim keybindings in emacs (heresy, i know..) -----
@@ -179,6 +183,9 @@
 (use-package glsl-mode)
 
 (use-package racket-mode
+  :after (:all rainbow-delimiters-mode
+	       smartparens-mode
+	       evil-smartparens-mode)
   :hook (racket-mode . my-lisp-setup))
 
 ;; ----- Lisp-related packages -----
@@ -230,12 +237,10 @@
 ;; ----- markdown-mode: pretty self-explanatory. we also get some packages to view formatted markdown -----
 (use-package markdown-mode
   :hook (markdown-mode . visual-line-mode))
-(use-package markdown-preview-eww)
-(use-package markdown-preview-mode)
-
-;; UNCOMMENT THIS IF ON A FRESH INSTALL:
-;;(package-refresh-contents)
-;; If you get all the autoload bugs, use the init.sh script
+(use-package markdown-preview-eww
+  :after markdown-mode)
+(use-package markdown-preview-mode
+  :after markdown-mode)
 
 ;; -------------- END OF PACKAGES CONFIG --------------
 ;; ----------------------------------------------------
