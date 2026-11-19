@@ -8,6 +8,7 @@ font.el
 session.*
 *.desktop
 tramp
+
 lisp/compuni/
 eln-cache/
 elpa/

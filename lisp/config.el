@@ -96,11 +96,7 @@
   (ido-everywhere 1))
 
 (use-package lisp-mode
-  :ensure nil
-;;:after (:all rainbow-delimiters-mode
-;;	       smartparens-mode
-;;	       evil-smartparens-mode)
-  :hook (emacs-lisp-mode . my-lisp-setup))
+  :ensure nil)
 
 ;; ----- evil: for Vim keybindings in emacs (heresy, i know..) -----
 (use-package evil
@@ -142,6 +138,26 @@
   (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
   (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this))
 
+;; ----- exec-path-from-shell: use our shell's PATH in emacs -----
+(use-package exec-path-from-shell
+  :unless (eq system-type 'windows-nt)
+  :config
+  (exec-path-from-shell-initialize)
+  (setenv "BROWSER" "firefox"))
+
+;; ----- which-key: helper for showing possible key combinations -----
+(use-package which-key
+  :config
+  (which-key-mode))
+
+;; ----- move text around... obviously -----
+(use-package move-text)
+
+;; ----- flycheck: a requirement for company-mode on mac, apparently -----
+(use-package flycheck
+  :defer t
+  :if (eq system-type 'mac))
+
 ;; ----- gtpel: LLM client in Emacs. Exclusively for local models and I use it mostly for writing. -----
 (use-package gptel
   :config
@@ -167,6 +183,14 @@
   (define-key global-map (kbd "C-c RET") 'gptel-menu))
 
 ;; ----- Support for different languages -----
+;; ----- markdown-mode: pretty self-explanatory. we also get some packages to view formatted markdown -----
+(use-package markdown-mode
+  :hook (markdown-mode . visual-line-mode))
+(use-package markdown-preview-eww
+  :after markdown-mode)
+(use-package markdown-preview-mode
+  :after markdown-mode)
+
 ;; ----- rust-mode: always use cargo for compiling (who needs cargo-mode?) -----
 (use-package rust-mode
   :hook (rust-mode . eglot-ensure)
@@ -183,22 +207,30 @@
 (use-package glsl-mode)
 
 (use-package racket-mode
-  :after (:all rainbow-delimiters-mode
-	       smartparens-mode
-	       evil-smartparens-mode)
+  :after (:all rainbow-delimiters
+	       smartparens
+	       evil-smartparens)
   :hook (racket-mode . my-lisp-setup))
 
 ;; ----- Lisp-related packages -----
-(use-package rainbow-delimiters)
-(use-package smartparens)
-(use-package evil-smartparens)
+(use-package rainbow-delimiters
+  :hook ((emacs-lisp-mode lisp-mode) . rainbow-delimiters-mode))
+(use-package smartparens
+  :hook ((emacs-lisp-mode lisp-mode) . smartparens-mode))
+(use-package evil-smartparens
+  :hook (smartparens-enabled . evil-smartparens-mode))
 
-;; ----- exec-path-from-shell: use our shell's PATH in emacs -----
-(use-package exec-path-from-shell
-  :unless (eq system-type 'windows-nt)
+;; ----- theming thingies -----
+(use-package rainbow-mode)  ;; i really like #a331cc
+(use-package hl-todo
   :config
-  (exec-path-from-shell-initialize)
-  (setenv "BROWSER" "firefox"))
+  (global-hl-todo-mode))    ;; test: TODO! and FIXME! or even DEBUG!
+
+;; ----- org-bullets: pretty org-mode headers and such -----
+(use-package org-bullets
+  :hook (org-mode . org-bullets-mode)
+  :custom
+  (org-edit-src-content-indentation 0))
 
 ;; ----- our color themes! -----
 (use-package quasi-monochrome-theme)
@@ -210,37 +242,6 @@
   :config
   (setcdr (assoc 'gnus-group-news-low-empty doom-themes-base-faces)
           '(:inherit 'gnus-group-mail-1-empty :weight 'normal)))
-
-;; ----- which-key: helper for showing possible key combinations -----
-(use-package which-key
-  :config
-  (which-key-mode))
-(use-package move-text)
-
-;; ----- org-bullets: pretty org-mode headers and such -----
-(use-package org-bullets
-  :hook (org-mode . org-bullets-mode)
-  :custom
-  (org-edit-src-content-indentation 0))
-
-;; ----- theming thingies. rainbow-mode for color codes and hl-todo for TODO -----
-(use-package rainbow-mode)
-(use-package hl-todo
-  :config
-  (global-hl-todo-mode))
-
-;; ----- flycheck: a requirement for company-mode on mac, apparently -----
-(use-package flycheck
-  :defer t
-  :if (eq system-type 'mac))
-
-;; ----- markdown-mode: pretty self-explanatory. we also get some packages to view formatted markdown -----
-(use-package markdown-mode
-  :hook (markdown-mode . visual-line-mode))
-(use-package markdown-preview-eww
-  :after markdown-mode)
-(use-package markdown-preview-mode
-  :after markdown-mode)
 
 ;; -------------- END OF PACKAGES CONFIG --------------
 ;; ----------------------------------------------------
